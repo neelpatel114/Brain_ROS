@@ -141,6 +141,7 @@ class serialNODE():
     def _write(self, msg):
         """ Represents the writing activity on the the serial.
         """
+        print(msg.data)
         command = json.loads(msg.data)
         # Unpacking the dictionary into action and values
         command_msg = self.messageConverter.get_command(**command)
