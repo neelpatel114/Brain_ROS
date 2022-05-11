@@ -26,11 +26,14 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE
 
+from multiprocessing import Pipe
 from threading import Thread
 from server_data import ServerData
 from server_listener import ServerListener
 from server_subscriber import ServerSubscriber
 from position_listener import PositionListener
+
+import time
 
 class LocalisationSystem(Thread):
     
@@ -39,9 +42,7 @@ class LocalisationSystem(Thread):
         the coordinate of the robot on the race track. It has two main state, the setup state and the listening state. 
         In the setup state, it creates the connection with server. It's receiving  the messages from the server in the listening
         state. 
-
         It's a thread, so can be running parallel with other threads. You can access to the received parameters via 'coor' function.
-
         """
         super(LocalisationSystem, self).__init__()
         #: serverData object with server parameters
@@ -83,4 +84,24 @@ class LocalisationSystem(Thread):
         self.__server_listener.stop()
         self.__position_listener.stop()
 
+if __name__ == '__main__':
+    beacon = 12345
+    id = 4
+    serverpublickey = 'publickey_server.pem'
+    
+    gpsStR, gpsStS = Pipe(duplex = False)
+    
+    LocalisationSystem = LocalisationSystem(id, beacon, serverpublickey, gpsStS)
+    LocalisationSystem.start()  
+    
+    time.sleep(5)
+    while True:
+        try:
+            coora = gpsStR.recv()
+            print(coora['timestamp'], coora['coor'][0].real, coora['coor'][0].imag, coora['coor'][1].real, coora['coor'][1].imag)
+        except KeyboardInterrupt:
+            break
+        
+    LocalisationSystem.stop()
 
+    LocalisationSystem.join()

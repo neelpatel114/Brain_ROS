@@ -7,6 +7,12 @@ import cv2
 import numpy as np
 import rospy
 import json
+import glob
+import os
+import sys
+import math
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 from cv_bridge       import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image
