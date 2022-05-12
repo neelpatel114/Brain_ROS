@@ -590,6 +590,7 @@ def func():
     while(True):
         #pubSpeed.publish(0.10)
         #time.sleep(1000)
+        i =1
         #pub.publish(18.1)
 
 if __name__ == '__main__':
