@@ -598,8 +598,8 @@ if __name__ == '__main__':
     bridge = CvBridge()
     rospy.init_node('ImgCap_Test', anonymous=True)
     cv2.namedWindow("Image Window", 1)
-    PID = "{'action': '4', 'activate': True}"
-    #PID = PID.replace("'", '"') #must replace '' for json formate (this was easier than regex)
+    PID = "{'action': '4', 'activate': 'True'}"
+    PID = PID.replace("'", '"') #must replace '' for json formate (this was easier than regex)
     print(PID)
     command_publisher.publish(PID) #send command to serialNODE
     time.sleep(3)
