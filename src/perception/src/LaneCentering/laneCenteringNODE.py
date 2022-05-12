@@ -588,9 +588,9 @@ pubSpeed = rospy.Publisher('SpeedAdjustment', Float64, queue_size=10)
 
 def func():
     while(True):
-        pubSpeed.publish(0.09)
-        time.sleep(1000)
-        pub.publish(18.1)
+        pubSpeed.publish(0.10)
+        #time.sleep(1000)
+        #pub.publish(18.1)
 
 if __name__ == '__main__':
 

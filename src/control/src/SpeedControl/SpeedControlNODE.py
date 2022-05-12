@@ -2,7 +2,7 @@
 
 
 import rospy
-import time
+
 from std_msgs.msg import Float64
 from std_msgs.msg import String
 
@@ -15,18 +15,16 @@ class speedNODE():
 
         # Command publisher object
         self.command_publisher = rospy.Publisher("/automobile/command", String, queue_size=1)
-        PID = "{'action': '4', 'activate': True}"
-        PID = PID.replace("'", '"') #must replace '' for json formate (this was easier than regex)
-        print(PID)
-        self.command_publisher.publish(PID) #send command to serialNODE]
-        time.sleep(10)
         
 
     def speed_callback(self, data):
         #rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
         #take value from data and use it as a paramter to make it into a command and publish
         #{'action': '2', 'steerAngle': 0.0}
-
+        PID = "{'action': '4', 'activate': True}"
+        PID = PID.replace("'", '"') #must replace '' for json formate (this was easier than regex)
+        print(PID)
+        self.command_publisher.publish(PID) #send command to serialNODE
 
         command = "{'action': '1', 'speed': " + str(data.data) + "}"
         command = command.replace("'", '"') #must replace '' for json formate (this was easier than regex)
