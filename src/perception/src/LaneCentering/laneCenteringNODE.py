@@ -539,6 +539,7 @@ class ImgCap():
     def __init__(self):
         self.sub_image = rospy.Subscriber("/automobile/image_raw", Image, self.image_callback)
         cv2.namedWindow("Image Window", 1)
+        print("hello")
     def image_callback(self, img_msg):
         # log some info about the image topic
         #rospy.loginfo(img_msg.header)
