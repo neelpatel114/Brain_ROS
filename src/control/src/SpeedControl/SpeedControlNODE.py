@@ -22,13 +22,14 @@ class speedNODE():
         #take value from data and use it as a paramter to make it into a command and publish
         #{'action': '2', 'steerAngle': 0.0}
         PID = "{'action': '4', 'activate': True}"
-        PID = PID.replace("'", '"') #must replace '' for json formate (this was easier than regex)
+        #PID = PID.replace("'", '"') #must replace '' for json formate (this was easier than regex)
+        print(PID)
         self.command_publisher.publish(PID) #send command to serialNODE
-        
+
         command = "{'action': '1', 'speed': " + str(data.data) + "}"
         command = command.replace("'", '"') #must replace '' for json formate (this was easier than regex)
 
-        print(command)
+        #print(command)
         self.command_publisher.publish(command) #send command to serialNODE
 
 
