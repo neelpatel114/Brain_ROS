@@ -24,8 +24,8 @@ class speedNODE():
         command = "{'action': '1', 'speed': " + str(data.data) + "}"
         command = command.replace("'", '"') #must replace '' for json formate (this was easier than regex)
 
-        #print(command)
-        #self.command_publisher.publish(command) #send command to serialNODE
+        print(command)
+        self.command_publisher.publish(command) #send command to serialNODE
 
 
      # ===================================== RUN ==========================================
@@ -50,5 +50,5 @@ class speedNODE():
 
             
 if __name__ == "__main__":
-    steerNod = speedNODE()
-    steerNod.run()
+    speedNod = speedNODE()
+    speedNod.run()

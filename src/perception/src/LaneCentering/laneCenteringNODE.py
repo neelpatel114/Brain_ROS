@@ -14,12 +14,12 @@ import math
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
-from cv_bridge       import CvBridge, CvBridgeError
+from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image
 from std_msgs.msg import Float64
 
 pub = rospy.Publisher('LaneAdjustment', Float64, queue_size=10)
-pubSped = rospy.Publisher('SpeedAdjustment', Float64, queue_size=10)
+pubSpeed = rospy.Publisher('SpeedAdjustment', Float64, queue_size=10)
 
 
 #############################LANE FINDING####################################
@@ -586,13 +586,9 @@ pubSped = rospy.Publisher('SpeedAdjustment', Float64, queue_size=10)
 #################################### MAIN #########################################
 
 class test:
-    def __init__(self):
-        self.speed 
-        self.steer
-
     def func(self):
         while(True):
-            pubSped.publish("9.0")
+            pubSpeed.publish("9.0")
 
 if __name__ == '__main__':
 
@@ -601,7 +597,7 @@ if __name__ == '__main__':
     rospy.init_node('ImgCap_Test', anonymous=True)
     cv2.namedWindow("Image Window", 1)
     #LC = lane_finding()
-    testing = test();
+    testing = test()
 
     #loop image collection
     while not rospy.is_shutdown():
