@@ -20,7 +20,7 @@ from std_msgs.msg import Float64
 
 pub = rospy.Publisher('LaneAdjustment', Float64, queue_size=10)
 pubSpeed = rospy.Publisher('SpeedAdjustment', Float64, queue_size=10)
-
+command_publisher = rospy.Publisher("/automobile/command", String, queue_size=1)
 
 #############################LANE FINDING####################################
 #class lane_finding:
@@ -598,11 +598,16 @@ if __name__ == '__main__':
     bridge = CvBridge()
     rospy.init_node('ImgCap_Test', anonymous=True)
     cv2.namedWindow("Image Window", 1)
+    PID = "{'action': '4', 'activate': True}"
+    PID = PID.replace("'", '"') #must replace '' for json formate (this was easier than regex)
+    print(PID)
+    command_publisher.publish(PID) #send command to serialNODE
     #LC = lane_finding()
-    func()
 
     #loop image collection
     while not rospy.is_shutdown():
         rospy.spin()
+        func()
+
 
 
