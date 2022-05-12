@@ -590,7 +590,8 @@ if __name__ == '__main__':
     bridge = CvBridge()
     rospy.init_node('ImgCap_Test', anonymous=True)
     cv2.namedWindow("Image Window", 1)
-
+    LC = lane_finding()
+    
     #loop image collection
     while not rospy.is_shutdown():
         rospy.spin()
