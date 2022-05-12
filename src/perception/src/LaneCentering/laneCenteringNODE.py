@@ -591,7 +591,7 @@ def func():
         pubSpeed.publish(0.10)
         #time.sleep(1000)
         pub.publish(18.1)
-        time.sleep(1000)
+        time.sleep(10)
         pub.publish(-18.1)
 
 
