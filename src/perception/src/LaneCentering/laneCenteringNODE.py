@@ -588,7 +588,7 @@ command_publisher = rospy.Publisher("/automobile/command", String, queue_size=1)
 
 def func():
     while(True):
-        pubSpeed.publish(0.10)
+        #pubSpeed.publish(0.10)
         #time.sleep(1000)
         #pub.publish(18.1)
 
@@ -598,10 +598,10 @@ if __name__ == '__main__':
     bridge = CvBridge()
     rospy.init_node('ImgCap_Test', anonymous=True)
     cv2.namedWindow("Image Window", 1)
-    PID = "{'action': '4', 'activate': 'True'}"
+    PID = "{'action': '4', 'activate': True}"
     PID = PID.replace("'", '"') #must replace '' for json formate (this was easier than regex)
     print(PID)
-    command_publisher.publish(PID) #send command to serialNODE
+    #command_publisher.publish(PID) #send command to serialNODE
     time.sleep(3)
     #LC = lane_finding()
     func()
