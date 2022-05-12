@@ -11,4 +11,6 @@
     <node pkg="perception" type="laneCenteringNODE.py" 		name="laneCenteringNODE"  		output="screen"/>
 
     <node pkg="control" type="SteeringControlNODE.py" 		name="SteeringControlNODE"  		output="screen"/>
+
+    <node pkg="control" type="SpeedControlNODE.py" 		name="SpeedControlNODE"  		output="screen"/>
 </launch>

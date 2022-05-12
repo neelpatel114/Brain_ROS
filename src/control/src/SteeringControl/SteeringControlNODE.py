@@ -15,9 +15,7 @@ class steeringNODE():
 
         # Command publisher object
         self.command_publisher = rospy.Publisher("/automobile/command", String, queue_size=1)
-        PID = "{'action': '4', 'activate': True}"
-        PID = PID.replace("'", '"') #must replace '' for json formate (this was easier than regex)
-        self.command_publisher.publish(PID) #send command to serialNODE
+
 
     def steering_callback(self, data):
         #rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
@@ -26,7 +24,7 @@ class steeringNODE():
 
         command = "{'action': '2', 'steerAngle': " + str(data.data) + "}"
         command = command.replace("'", '"') #must replace '' for json formate (this was easier than regex)
-
+        self.command_publisher.publish(command) #send command to serialNODE
         print(command)
 
         
