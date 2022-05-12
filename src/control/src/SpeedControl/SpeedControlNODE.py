@@ -19,7 +19,7 @@ class speedNODE():
         PID = PID.replace("'", '"') #must replace '' for json formate (this was easier than regex)
         print(PID)
         self.command_publisher.publish(PID) #send command to serialNODE]
-        time.sleep(1000)
+        time.sleep(10)
         
 
     def speed_callback(self, data):
