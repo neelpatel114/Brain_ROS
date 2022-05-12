@@ -1,28 +1,17 @@
-#! /usr/bin/env python3
+#!/usr/bin/env python
 
-import socket
-import struct
-import time
-import cv2
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 import numpy as np
-import rospy
-import json
+import cv2
 import glob
 import os
 import sys
 import math
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
+import time
+#import rospy
+#from std.msgs.msg import UInt8
 
-from cv_bridge       import CvBridge, CvBridgeError
-from sensor_msgs.msg import Image
-from std_msgs.msg import Float64
-
-pub = rospy.Publisher('LaneAdjustment', Float64, queue_size=10)
-
-
-
-#############################LANE FINDING####################################
 class lane_finding:
 
     def __init__(self):
@@ -38,26 +27,8 @@ class lane_finding:
         self.tl=(120,320)
         self.tr=(500,320)
         self.br=(640,480)
-        self.sub_image = rospy.Subscriber("/automobile/image_raw", Image, self.image_callback)
-        cv2.namedWindow("Image Window", 1)
         #self.pub = rospy.Publisher("topic_name", UInt8, queue_size=10)
-    
-    def image_callback(self, img_msg):
-        # log some info about the image topic
-        #rospy.loginfo(img_msg.header)
-        # Try to convert the ROS Image message to a CV2 Image
-        try:
-            cv_image = bridge.imgmsg_to_cv2(img_msg, "passthrough")
-        except CvBridgeError as e:
-            rospy.logerr("CvBridge Error: {0}".format(e))
-        # Show the converted image
-
-        #comment out if you do not want output
-        #self.show_image(cv_image)
-        self.run(cv_image)
-
-    def show_image(self, img): 
-        cv2.imshow("Image Window", img)
+        
 
     def warp(self,img): # mts, dist
         #undist = cv2.undistort(img, mtx, dist, None, mtx)
@@ -471,9 +442,9 @@ class lane_finding:
         return out_img, veh_pos
 
 
-    def run(self, img):
+    def run(self):
 
-        cap = img # test_sample.mp4
+        cap = cv2.VideoCapture('my_video2.h264') # test_sample.mp4
         if not cap.isOpened():
             print('File open failed!')
             cap.release()
@@ -494,7 +465,7 @@ class lane_finding:
         #mtx, dist = distortion_factors()
 
         while True:
-            frame = img
+            ret, frame =cap.read()
             self.frame=cv2.resize(frame,(640,480))
             canny_image = self.canny()
             cropped_canny = self.region_of_interest(canny_image)
@@ -503,6 +474,8 @@ class lane_finding:
                 averaged_lines = self.average_slope_intercept(lines)
             #print(frame.shape)
 
+            if not ret:
+                break
            
             img_out, angle = self.lane_finding_pipeline(frame)
 
@@ -532,67 +505,10 @@ class lane_finding:
         cap.release()
         #result.release()
         cv2.destroyAllWindows()
+   
 
-
-################################### IMG DATA #####################################
-class ImgCap():
-    def __init__(self):
-        self.sub_image = rospy.Subscriber("/automobile/image_raw", Image, self.image_callback)
-        cv2.namedWindow("Image Window", 1)
-    def image_callback(self, img_msg):
-        # log some info about the image topic
-        #rospy.loginfo(img_msg.header)
-        # Try to convert the ROS Image message to a CV2 Image
-        try:
-            cv_image = bridge.imgmsg_to_cv2(img_msg, "passthrough")
-        except CvBridgeError as e:
-            rospy.logerr("CvBridge Error: {0}".format(e))
-        # Show the converted image
-
-        #comment out if you do not want output
-        #self.show_image(cv_image)
-        self.LaneCentering(cv_image)
-
-    def show_image(self, img): 
-        cv2.imshow("Image Window", img)
-
-    def LaneCentering(self, img):
-        frame = img
-        frame=cv2.resize(frame, (640,480))
-        canny_image = canny(frame)
-        cropped_canny = region_of_interest(canny_image)
-        
-        lines = cv2.HoughLinesP(cropped_canny, 1, np.pi/180, 50, np.array([]), minLineLength=5, maxLineGap=20)
-        #print(lines)
-        if lines is None:
-            print('No line detected')
-            #cv2.imshow("canny", cropped_canny)
-            #fin=frame
-        else:
-            averaged_lines = average_slope_intercept(frame, lines)
-            line_image,mean = display_lines(frame, averaged_lines)
-            combo_image = cv2.addWeighted(frame, 0.8, line_image, 1, 1)
-        #print(combo_image.shape)
-            cv2.line(combo_image,(mean,int(combo_image.shape[0]*4/5)), (mean, int(combo_image.shape[0]*4/5)-10), (0,0,255),2)
-            cv2.line(combo_image,(320,235),(320,245), (0,0,255),2)
-            pos=mean-320
-            #combo_image=cv2.resize(combo_image,(700,500))
-            im0=combo_image
-        #cv2.imshow("final", fin)
-        pub.publish(20.5)
-        #cv2.imshow("line", cropped_canny)
-
-
-################################### MAIN #########################################
-if __name__ == '__main__':
-
-    #need the below 4 lines to collect image 
-    bridge = CvBridge()
-    rospy.init_node('ImgCap_Test', anonymous=True)
-    cv2.namedWindow("Image Window", 1)
-
-    #loop image collection
-    while not rospy.is_shutdown():
-        rospy.spin()
-
-
+if __name__ == "__main__":
+    #rospy.init_node("node_name",anonymous=True)
+    #rospy.subscriber("topic_name",camera data type, call back function)
+    lane=lane_finding()
+    lane.run()
