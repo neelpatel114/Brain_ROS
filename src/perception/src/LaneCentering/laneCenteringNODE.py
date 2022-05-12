@@ -13,7 +13,7 @@ import sys
 import math
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
-
+from std_msgs.msg import String
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image
 from std_msgs.msg import Float64
