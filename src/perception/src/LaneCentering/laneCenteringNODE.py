@@ -585,10 +585,10 @@ pubSpeed = rospy.Publisher('SpeedAdjustment', Float64, queue_size=10)
 #
 #################################### MAIN #########################################
 
-class test:
-    def func():
-        while(True):
-            pubSpeed.publish(9.0)
+
+def func():
+    while(True):
+        pubSpeed.publish(9.0)
 
 if __name__ == '__main__':
 
@@ -597,8 +597,7 @@ if __name__ == '__main__':
     rospy.init_node('ImgCap_Test', anonymous=True)
     cv2.namedWindow("Image Window", 1)
     #LC = lane_finding()
-    testing = test()
-    testing.func()
+    func()
 
     #loop image collection
     while not rospy.is_shutdown():
