@@ -26,7 +26,7 @@ class speedNODE():
         command = "{'action': '1', 'speed': " + str(data.data) + "}"
         command = command.replace("'", '"') #must replace '' for json formate (this was easier than regex)
 
-        print(command)
+        #print(command)
         self.command_publisher.publish(command) #send command to serialNODE
 
 
