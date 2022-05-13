@@ -428,8 +428,7 @@ class lane_finding:
             if ((self.stop==False) & (len(rightx)>300) & (len(leftx)>300)):
                 #print('99999999')
                 self.msg=3
-
-            pubSpeed.publish(0.09)
+                        pubSpeed.publish(0.09)
             print(self.msg)
             
             pubSpeed.publish(0.09)
@@ -437,16 +436,17 @@ class lane_finding:
                 pub.publish(0)
                 time.sleep(2)
             if(self.msg == 2):
-                pub.publish(18.0)
+                pub.publish(-18.0)
                 time.sleep(2)
             if(self.msg == 1):
-                pub.publish(-18.0)
+                pub.publish(18.0)
                 time.sleep(2)
             if(self.msg == 0):
                 pubSpeed.publish(0.0)
                 time.sleep(5)
                 pubSpeed.publish(0.09)
                 time.sleep(2)
+
 
         elif self.stop:
         #self.tr=(600,280)
