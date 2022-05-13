@@ -368,7 +368,7 @@ class lane_finding:
         ## checking ###
         binary_thresh_s = np.dstack((binary_thresh, binary_thresh, binary_thresh))*255
         binary_warped_s = np.dstack((self.binary_warped, self.binary_warped, self.binary_warped))*255
-        cv2.imshow('binary',cv2.resize(binary_warped_s,(400,300)))
+        #cv2.imshow('binary',cv2.resize(binary_warped_s,(400,300)))
         
         if self.init:
             print(self.init)
@@ -430,23 +430,24 @@ class lane_finding:
                 self.msg=3
 
             pubSpeed.publish(0.09)
+            time.sleep(1)
             print(self.msg)
             
             pubSpeed.publish(0.09)
             if(self.msg == 3):
                 pub.publish(0)
-                #time.sleep(2)
+                time.sleep(1)
             if(self.msg == 2):
                 pub.publish(18.0)
-                #time.sleep(2)
+                time.sleep(1)
             if(self.msg == 1):
                 pub.publish(-18.0)
-                #time.sleep(2)
+                time.sleep(1)
             if(self.msg == 0):
                 pubSpeed.publish(0.0)
                 time.sleep(5)
                 pubSpeed.publish(0.09)
-                #time.sleep(2)
+                time.sleep(1)
 
         elif self.stop:
         #self.tr=(600,280)
@@ -536,17 +537,17 @@ class lane_finding:
         #else:
         #    init=False
         self.init=False
-        cv2.line(img_out,(self.bl),(self.tl),(255,0,0),2)
-        cv2.line(img_out,(self.tl),(self.tr),(255,0,0),2)
-        cv2.line(img_out,(self.tr),(self.br),(255,0,0),2)
-        cv2.line(img_out,(self.bl),(self.br),(255,0,0),2)
+        #cv2.line(img_out,(self.bl),(self.tl),(255,0,0),2)
+        #cv2.line(img_out,(self.tl),(self.tr),(255,0,0),2)
+        #cv2.line(img_out,(self.tr),(self.br),(255,0,0),2)
+        #cv2.line(img_out,(self.bl),(self.br),(255,0,0),2)
         
-        cv2.line(img_out,(320,230),(320,250), (0,0,255),2)
-        cv2.putText(img_out,'Publshied msg: '+str(self.msg)[:7],(40,150), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1.6,(255,255,255),2,cv2.LINE_AA)
+        #cv2.line(img_out,(320,230),(320,250), (0,0,255),2)
+        #cv2.putText(img_out,'Publshied msg: '+str(self.msg)[:7],(40,150), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1.6,(255,255,255),2,cv2.LINE_AA)
 
             
         #cv2.namedWindow('frame',cv2.WINDOW_NORMAL)
-        cv2.imshow('frame', cv2.resize(img_out,(600,400)))
+        #cv2.imshow('frame', cv2.resize(img_out,(600,400)))
         #result.write(img_out)
     
 
