@@ -450,16 +450,20 @@ class lane_finding:
             print(self.msg)
             
             pubSpeed.publish(0.10)
-            if(self.msg == 3):
-                pub.publish(0)
             if(self.msg == 2):
+                pub.publish(0)
+                time.sleep(2)
+            if(self.msg == 3):
                 pub.publish(-18.0)
+                time.sleep(2)
             if(self.msg == 1):
                 pub.publish(18.0)
+                time.sleep(2)
             if(self.msg == 0):
                 pubSpeed.publish(0.0)
                 time.sleep(5)
                 pubSpeed.publish(0.09)
+                time.sleep(2)
             
 
             return self.frame, None
