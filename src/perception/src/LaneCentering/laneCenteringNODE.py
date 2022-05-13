@@ -428,6 +428,7 @@ class lane_finding:
                 self.msg=3
 
             pubSpeed.publish(0.10)
+            time.sleep(1)
             print(self.msg)
             
             pubSpeed.publish(0.10)
