@@ -399,6 +399,7 @@ class lane_finding:
             self.right_fit_hist = np.vstack([self.right_fit_hist, new_right_fit])
             self.msg=3
             self.big_slope=[]
+
         
         elif ((self.stop==False) & (self.init==False)):
             #print(self.stop, self.init)
@@ -429,24 +430,7 @@ class lane_finding:
                 #print('99999999')
                 self.msg=3
 
-            pubSpeed.publish(0.09)
-            print(self.msg)
-            print("paul is the goat")
-            pubSpeed.publish(0.09)
-            if(self.msg == 3):
-                pub.publish(0)
-                time.sleep(2)
-            if(self.msg == 2):
-                pub.publish(-18.0)
-                time.sleep(2)
-            if(self.msg == 1):
-                pub.publish(18.0)
-                time.sleep(2)
-            if(self.msg == 0):
-                pubSpeed.publish(0.0)
-                time.sleep(5)
-                pubSpeed.publish(0.09)
-                time.sleep(2)
+            
 
 
         elif self.stop:
@@ -472,7 +456,24 @@ class lane_finding:
             
 
             return self.frame, None
-
+        pubSpeed.publish(0.09)
+        print(self.msg)
+        print("paul is the goat")
+        pubSpeed.publish(0.09)
+        if(self.msg == 3):
+            pub.publish(0)
+            time.sleep(2)
+        if(self.msg == 2):
+            pub.publish(-18.0)
+            time.sleep(2)
+        if(self.msg == 1):
+            pub.publish(18.0)
+            time.sleep(2)
+        if(self.msg == 0):
+            pubSpeed.publish(0.0)
+            time.sleep(5)
+            pubSpeed.publish(0.09)
+            time.sleep(2)
         print(self.msg)
         if (len(leftx)==0 or len(rightx)==0):
             return self.frame, None 
