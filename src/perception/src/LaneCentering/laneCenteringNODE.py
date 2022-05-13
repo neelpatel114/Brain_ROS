@@ -46,7 +46,7 @@ class lane_finding:
         # log some info about the image topic
         #rospy.loginfo(img_msg.header)
         # Try to convert the ROS Image message to a CV2 Image
-        rospy.loginfo(img_msg.header)
+        #rospy.loginfo(img_msg.header)
         try:
             cv_image = bridge.imgmsg_to_cv2(img_msg, "passthrough")
         except CvBridgeError as e:
@@ -55,7 +55,7 @@ class lane_finding:
 
         #comment out if you do not want output
         #self.show_image(cv_image)
-        self.run(img_msg)
+        self.run(cv_image)
 
     def show_image(self, img): 
         cv2.imshow("Image Window", img)
@@ -492,7 +492,7 @@ class lane_finding:
         return out_img, veh_pos
 
 
-    def run(self, img_msg):
+    def run(self, img):
 
        #cap = img # test_sample.mp4
        # cap = cv2.resize(frame,(640,480))
@@ -511,10 +511,6 @@ class lane_finding:
        # mtx, dist = distortion_factors()
 
         #while True:
-        try:
-            cv_image = bridge.imgmsg_to_cv2(img_msg, "passthrough")
-        except CvBridgeError as e:
-            rospy.logerr("CvBridge Error: {0}".format(e))
         # Show the converted image
         
         #coment out if you do not want output
