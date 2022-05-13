@@ -473,7 +473,7 @@ class lane_finding:
 
 
     def run(self, img):
-        cap = cv2.VideoCapture('my_video2.h264') # test_sample.mp4
+        cap = cv2.VideoCapture('/Users/npatel/Desktop/Brain_ROS/src/perception/src/LaneCentering/my_video2.h264') # test_sample.mp4
         if not cap.isOpened():
             print('File open failed!')
             cap.release()
@@ -607,6 +607,7 @@ if __name__ == '__main__':
     time.sleep(3)
     #LC = lane_finding()
     lane = lane_finding()
+
     #loop image collection
     while not rospy.is_shutdown():
         rospy.spin()
