@@ -446,6 +446,7 @@ class lane_finding:
                 #self.tr=(450,280)
                 #self.br=(550,480)
             print(self.msg)
+            pubSpeed.publish(0.10)
             if(self.msg == 3):
                 pub.publish(0)
             if(self.msg == 2):
