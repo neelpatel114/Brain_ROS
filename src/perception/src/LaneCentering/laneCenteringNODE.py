@@ -40,6 +40,7 @@ class lane_finding:
         self.br=(640,480)
         self.sub_image = rospy.Subscriber("/automobile/image_raw", Image, self.image_callback)
         cv2.namedWindow("Image Window", 1)
+        print("Hello")
         #self.pub = rospy.Publisher("topic_name", UInt8, queue_size=10)
     
     def image_callback(self, img_msg):
@@ -585,8 +586,7 @@ class lane_finding:
 #
 
 ################################### MAIN #########################################
-def func():
-    lane = lane_finding
+#def func():
 #        pubSpeed.publish(0.10)
 #        time.sleep(1000)
 #        pub.publish(18.1)
@@ -606,7 +606,7 @@ if __name__ == '__main__':
     command_publisher.publish(PID) #send command to serialNODE
     time.sleep(3)
     #LC = lane_finding()
-    func()
+    lane = lane_finding
     #loop image collection
     while not rospy.is_shutdown():
         rospy.spin()
