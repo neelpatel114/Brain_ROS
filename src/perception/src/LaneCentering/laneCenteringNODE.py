@@ -606,8 +606,7 @@ if __name__ == '__main__':
     command_publisher.publish(PID) #send command to serialNODE
     time.sleep(3)
     #LC = lane_finding()
-    lane = lane_finding
-    print("hello")
+    lane = lane_finding()
     #loop image collection
     while not rospy.is_shutdown():
         rospy.spin()
