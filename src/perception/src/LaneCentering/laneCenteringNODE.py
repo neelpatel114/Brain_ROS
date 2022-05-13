@@ -53,7 +53,7 @@ class lane_finding:
         # Show the converted image
 
         #comment out if you do not want output
-        #self.show_image(cv_image)
+        self.show_image(cv_image)
         self.run(cv_image)
 
     def show_image(self, img): 
@@ -472,8 +472,7 @@ class lane_finding:
 
 
     def run(self, img):
-
-        cap = img # test_sample.mp4
+        cap = cv2.VideoCapture('my_video2.h264') # test_sample.mp4
         if not cap.isOpened():
             print('File open failed!')
             cap.release()
@@ -494,7 +493,7 @@ class lane_finding:
         #mtx, dist = distortion_factors()
 
         while True:
-            frame = img
+            ret, frame =cap.read()
             self.frame=cv2.resize(frame,(640,480))
             canny_image = self.canny()
             cropped_canny = self.region_of_interest(canny_image)
@@ -503,6 +502,8 @@ class lane_finding:
                 averaged_lines = self.average_slope_intercept(lines)
             #print(frame.shape)
 
+            if not ret:
+                break
            
             img_out, angle = self.lane_finding_pipeline(frame)
 
@@ -585,10 +586,7 @@ class lane_finding:
 
 ################################### MAIN #########################################
 def func():
-
-    while(True):
-        lane = lane_finding 
-        lane.show_image()
+    lane = lane_finding
 #        pubSpeed.publish(0.10)
 #        time.sleep(1000)
 #        pub.publish(18.1)
