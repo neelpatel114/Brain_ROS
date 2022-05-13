@@ -426,11 +426,10 @@ class lane_finding:
                 #print('99999999')
                 self.msg=3
 
-            pubSpeed.publish(0.10)
+            pubSpeed.publish(0.09)
             print(self.msg)
             
-            pubSpeed.publish(0.10)
-            print("hello")
+            pubSpeed.publish(0.09)
             if(self.msg == 3):
                 pub.publish(0)
                 #time.sleep(2)
@@ -511,50 +510,44 @@ class lane_finding:
         self.init=True
        # mtx, dist = distortion_factors()
 
-        while True:
-            try:
-                cv_image = bridge.imgmsg_to_cv2(img_msg, "passthrough")
-            except CvBridgeError as e:
-                rospy.logerr("CvBridge Error: {0}".format(e))
+        #while True:
+        try:
+            cv_image = bridge.imgmsg_to_cv2(img_msg, "passthrough")
+        except CvBridgeError as e:
+            rospy.logerr("CvBridge Error: {0}".format(e))
         # Show the converted image
-            
-        #comment out if you do not want output
-            frame = cv_image
-            self.frame=cv2.resize(frame,(640,480))
-            canny_image = self.canny()
-            cropped_canny = self.region_of_interest(canny_image)
-            lines = cv2.HoughLinesP(cropped_canny, 1, np.pi/180, 50, np.array([]), minLineLength=5, maxLineGap=20)
-            if lines is not None:
-                averaged_lines = self.average_slope_intercept(lines)
-            #print(frame.shape)
-
-           
-            img_out, angle = self.lane_finding_pipeline(frame)
-
-            #if angle>1.5 or angle <-1.5:
-            #   init=True
-            #else:
-            #    init=False
-
-            self.init=False
-
-            cv2.line(img_out,(self.bl),(self.tl),(255,0,0),2)
-            cv2.line(img_out,(self.tl),(self.tr),(255,0,0),2)
-            cv2.line(img_out,(self.tr),(self.br),(255,0,0),2)
-            cv2.line(img_out,(self.bl),(self.br),(255,0,0),2)
-            
-            cv2.line(img_out,(320,230),(320,250), (0,0,255),2)
-            cv2.putText(img_out,'Publshied msg: '+str(self.msg)[:7],(40,150), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1.6,(255,255,255),2,cv2.LINE_AA)
-
-            
-            #cv2.namedWindow('frame',cv2.WINDOW_NORMAL)
-            cv2.imshow('frame', cv2.resize(img_out,(600,400)))
-            #result.write(img_out)
         
-            if cv2.waitKey(1) == 27:
-                break
+        #coment out if you do not want output
+        frame = cv_image
+        self.frame=cv2.resize(frame,(640,480))
+        canny_image = self.canny()
+        cropped_canny = self.region_of_interest(canny_image)
+        lines = cv2.HoughLinesP(cropped_canny, 1, np.pi/180, 50, np.array([]), minLineLength=5, maxLineGap=20)
+        if lines is not None:
+            averaged_lines = self.average_slope_intercept(lines)
+        #print(frame.shape)
+        
+        img_out, angle = self.lane_finding_pipeline(frame)
+        #if angle>1.5 or angle <-1.5:
+        #   init=True
+        #else:
+        #    init=False
+        self.init=False
+        cv2.line(img_out,(self.bl),(self.tl),(255,0,0),2)
+        cv2.line(img_out,(self.tl),(self.tr),(255,0,0),2)
+        cv2.line(img_out,(self.tr),(self.br),(255,0,0),2)
+        cv2.line(img_out,(self.bl),(self.br),(255,0,0),2)
+        
+        cv2.line(img_out,(320,230),(320,250), (0,0,255),2)
+        cv2.putText(img_out,'Publshied msg: '+str(self.msg)[:7],(40,150), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1.6,(255,255,255),2,cv2.LINE_AA)
 
-        cap.release()
+            
+        #cv2.namedWindow('frame',cv2.WINDOW_NORMAL)
+        cv2.imshow('frame', cv2.resize(img_out,(600,400)))
+        #result.write(img_out)
+    
+
+        #cap.release()
         #result.release()
         cv2.destroyAllWindows()
 
