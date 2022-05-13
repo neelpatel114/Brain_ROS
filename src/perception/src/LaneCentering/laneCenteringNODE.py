@@ -40,7 +40,6 @@ class lane_finding:
         self.br=(640,480)
         self.sub_image = rospy.Subscriber("/automobile/image_raw", Image, self.image_callback)
         cv2.namedWindow("Image Window", 1)
-        print("Hello")
         #self.pub = rospy.Publisher("topic_name", UInt8, queue_size=10)
     
     def image_callback(self, img_msg):
@@ -473,7 +472,8 @@ class lane_finding:
 
 
     def run(self, img):
-        cap = cv2.VideoCapture('/Users/npatel/Desktop/Brain_ROS/src/perception/src/LaneCentering/my_video2.h264') # test_sample.mp4
+
+        cap = img # test_sample.mp4
         if not cap.isOpened():
             print('File open failed!')
             cap.release()
@@ -494,17 +494,15 @@ class lane_finding:
         #mtx, dist = distortion_factors()
 
         while True:
-            ret, frame =cap.read()
+            frame = img
             self.frame=cv2.resize(frame,(640,480))
             canny_image = self.canny()
             cropped_canny = self.region_of_interest(canny_image)
             lines = cv2.HoughLinesP(cropped_canny, 1, np.pi/180, 50, np.array([]), minLineLength=5, maxLineGap=20)
             if lines is not None:
                 averaged_lines = self.average_slope_intercept(lines)
-            print(frame.shape)
+            #print(frame.shape)
 
-            if not ret:
-                break
            
             img_out, angle = self.lane_finding_pipeline(frame)
 
@@ -586,7 +584,8 @@ class lane_finding:
 #
 
 ################################### MAIN #########################################
-#def func():
+def func():
+    lane = lane_finding
 #        pubSpeed.publish(0.10)
 #        time.sleep(1000)
 #        pub.publish(18.1)
@@ -605,9 +604,7 @@ if __name__ == '__main__':
     print(PID)
     command_publisher.publish(PID) #send command to serialNODE
     time.sleep(3)
-    #LC = lane_finding()
-    lane = lane_finding()
-
+    LC = lane_finding()
     #loop image collection
     while not rospy.is_shutdown():
         rospy.spin()
