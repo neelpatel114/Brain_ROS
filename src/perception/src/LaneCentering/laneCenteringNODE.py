@@ -428,7 +428,7 @@ class lane_finding:
             if ((self.stop==False) & (len(rightx)>300) & (len(leftx)>300)):
                 #print('99999999')
                 self.msg=3
-                        pubSpeed.publish(0.09)
+            pubSpeed.publish(0.09)
             print(self.msg)
             
             pubSpeed.publish(0.09)
