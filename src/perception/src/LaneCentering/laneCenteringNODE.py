@@ -474,10 +474,6 @@ class lane_finding:
     def run(self, img):
 
         cap = img # test_sample.mp4
-        if not cap.isOpened():
-            print('File open failed!')
-            cap.release()
-            sys.exit()
 
         ## video out ##
         w = round(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
