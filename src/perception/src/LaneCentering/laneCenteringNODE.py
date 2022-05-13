@@ -481,13 +481,13 @@ class lane_finding:
         #fps = cap.get(cv2.CAP_PROP_FPS) 
         #delay=int(1000 / fps)
 
-        #angle=0
+        angle=0
         #result = cv2.VideoWriter('filename3.avi', 
          #                cv2.VideoWriter_fourcc(*'MJPG'),
           #               30, (640,480))
 
-        #self.init=True
-        #mtx, dist = distortion_factors()
+        self.init=True
+        mtx, dist = distortion_factors()
 
         while True:
             frame = img
@@ -581,11 +581,10 @@ class lane_finding:
 
 ################################### MAIN #########################################
 def func():
-    lane = lane_finding
 #        pubSpeed.publish(0.10)
-#        time.sleep(1000)
+        time.sleep(5)
 #        pub.publish(18.1)
-#        time.sleep(10)
+#        time.sleep(7)
 #        pub.publish(-18.1)
 
 
