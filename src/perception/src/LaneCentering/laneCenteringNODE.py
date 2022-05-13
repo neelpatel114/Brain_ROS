@@ -428,7 +428,7 @@ class lane_finding:
             if ((self.stop==False) & (len(rightx)>300) & (len(leftx)>300)):
                 #print('99999999')
                 self.msg=3
-                
+
             pubSpeed.publish(0.09)
             print(self.msg)
             
@@ -612,9 +612,9 @@ class lane_finding:
 #
 
 ################################### MAIN #########################################
-def func():
-        pubSpeed.publish(0.10)
-        time.sleep(5)
+#def func():
+#        pubSpeed.publish(0.10)
+#        time.sleep(5)
 #        pub.publish(18.1)
 #        time.sleep(7)
 #        pub.publish(-18.1)
@@ -628,7 +628,7 @@ if __name__ == '__main__':
     cv2.namedWindow("Image Window", 1)
     PID = "{'action': '4', 'activate': true}"
     PID = PID.replace("'", '"') #must replace '' for json formate (this was easier than regex)
-    print(PID)
+    #print(PID)
     command_publisher.publish(PID) #send command to serialNODE
     time.sleep(3)
     #func()
