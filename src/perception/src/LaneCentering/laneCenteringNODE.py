@@ -412,6 +412,7 @@ class lane_finding:
             print(self.msg)
             
             pubSpeed.publish(0.09)
+            time.sleep(5)
             if ((len(rightx)<150) & (len(leftx)<150)):
                 self.stop=True
             if ((len(rightx)<300) & (len(leftx)!=0)):
@@ -492,7 +493,7 @@ class lane_finding:
         return out_img, veh_pos
 
 
-    def run(self, img):
+    def run(self, cv_image):
 
        #cap = img # test_sample.mp4
        # cap = cv2.resize(frame,(640,480))
