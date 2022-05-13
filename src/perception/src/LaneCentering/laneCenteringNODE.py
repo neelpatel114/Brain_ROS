@@ -549,7 +549,7 @@ class lane_finding:
 
         #cap.release()
         #result.release()
-        cv2.destroyAllWindows()
+        #cv2.destroyAllWindows()
 
 
 ################################### IMG DATA #####################################
