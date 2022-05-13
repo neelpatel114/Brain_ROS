@@ -431,7 +431,7 @@ class lane_finding:
 
             pubSpeed.publish(0.09)
             print(self.msg)
-            
+            print("paul is the goat")
             pubSpeed.publish(0.09)
             if(self.msg == 3):
                 pub.publish(0)
