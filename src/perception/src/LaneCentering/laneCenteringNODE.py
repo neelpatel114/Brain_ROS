@@ -512,6 +512,7 @@ class lane_finding:
         self.init=True
        # mtx, dist = distortion_factors()
 
+        #while True:
         frame = img
         self.frame=cv2.resize(frame,(640,480))
         canny_image = self.canny()
@@ -538,9 +539,12 @@ class lane_finding:
         #cv2.namedWindow('frame',cv2.WINDOW_NORMAL)
         cv2.imshow('frame', cv2.resize(img_out,(600,400)))
         #result.write(img_out)
+    
+        #if cv2.waitKey(1) == 27:
 
         #cap.release()
         #result.release()
+        #cv2.destroyAllWindows()
 
 
 ################################### IMG DATA #####################################
