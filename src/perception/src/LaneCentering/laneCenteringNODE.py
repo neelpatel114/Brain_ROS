@@ -500,7 +500,7 @@ class lane_finding:
             lines = cv2.HoughLinesP(cropped_canny, 1, np.pi/180, 50, np.array([]), minLineLength=5, maxLineGap=20)
             if lines is not None:
                 averaged_lines = self.average_slope_intercept(lines)
-            #print(frame.shape)
+            print(frame.shape)
 
             if not ret:
                 break
