@@ -53,7 +53,7 @@ class lane_finding:
         # Show the converted image
 
         #comment out if you do not want output
-        #self.show_image(cv_image)
+        self.show_image(cv_image)
         self.run(cv_image)
 
     def show_image(self, img): 
