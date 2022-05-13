@@ -53,6 +53,7 @@ class lane_finding:
         # Show the converted image
 
         #comment out if you do not want output
+        print("arian")
         self.run(img_msg)
 
     def show_image(self, img): 
