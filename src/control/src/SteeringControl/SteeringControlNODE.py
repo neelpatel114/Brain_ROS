@@ -25,7 +25,7 @@ class steeringNODE():
         command = "{'action': '2', 'steerAngle': " + str(data.data) + "}"
         command = command.replace("'", '"') #must replace '' for json formate (this was easier than regex)
         self.command_publisher.publish(command) #send command to serialNODE
-        print(command)
+        #print(command)
 
         
 
