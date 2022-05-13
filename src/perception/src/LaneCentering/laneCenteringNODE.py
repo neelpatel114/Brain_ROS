@@ -54,8 +54,8 @@ class lane_finding:
         # Show the converted image
 
         #comment out if you do not want output
-        self.show_image(cv_image)
-        #self.run(img_msg)
+        #self.show_image(cv_image)
+        self.run(img_msg)
 
     def show_image(self, img): 
         cv2.imshow("Image Window", img)
