@@ -407,12 +407,11 @@ class lane_finding:
             leftx, lefty, rightx, righty = self.find_lane_pixels_using_prev_poly()
             #if (len(lefty) <150 | len(righty) <150):
                 #leftx, lefty, rightx, righty = self.find_lane_pixels_using_histogram()
-            pubSpeed.publish(0.09)
-            time.sleep(1)
+
             print(self.msg)
-            
             pubSpeed.publish(0.09)
             time.sleep(5)
+            print("boo")
             if ((len(rightx)<150) & (len(leftx)<150)):
                 self.stop=True
             if ((len(rightx)<300) & (len(leftx)!=0)):
