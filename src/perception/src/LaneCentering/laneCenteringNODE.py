@@ -538,9 +538,7 @@ class lane_finding:
         #cv2.namedWindow('frame',cv2.WINDOW_NORMAL)
         cv2.imshow('frame', cv2.resize(img_out,(600,400)))
         #result.write(img_out)
-    
-        if cv2.waitKey(1) == 27:
-            break
+
         #cap.release()
         #result.release()
         cv2.destroyAllWindows()
