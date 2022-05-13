@@ -426,9 +426,30 @@ class lane_finding:
             if ((self.stop==False) & (len(rightx)>300) & (len(leftx)>300)):
                 #print('99999999')
                 self.msg=3
+
+            pubSpeed.publish(0.10)
+            print(self.msg)
+            
+            pubSpeed.publish(0.10)
+            print("hello")
+            if(self.msg == 2):
+                pub.publish(0)
+                #time.sleep(2)
+            if(self.msg == 3):
+                pub.publish(-18.0)
+                #time.sleep(2)
+            if(self.msg == 1):
+                pub.publish(18.0)
+                #time.sleep(2)
+            if(self.msg == 0):
+                pubSpeed.publish(0.0)
+                time.sleep(5)
+                pubSpeed.publish(0.09)
+                #time.sleep(2)
+
         elif self.stop:
-            #self.tr=(600,280)
-            #self.br=(640,480)
+        #self.tr=(600,280)
+        #self.br=(640,480)
             print('-----------')
             self.msg=0
             self.big_slope=[]
@@ -445,25 +466,7 @@ class lane_finding:
                 return self.frame, None
                 #self.tr=(450,280)
                 #self.br=(550,480)
-            pubSpeed.publish(0.10)
-            time.sleep(2)
-            print(self.msg)
-            
-            pubSpeed.publish(0.10)
-            if(self.msg == 2):
-                pub.publish(0)
-                time.sleep(2)
-            if(self.msg == 3):
-                pub.publish(-18.0)
-                time.sleep(2)
-            if(self.msg == 1):
-                pub.publish(18.0)
-                time.sleep(2)
-            if(self.msg == 0):
-                pubSpeed.publish(0.0)
-                time.sleep(5)
-                pubSpeed.publish(0.09)
-                time.sleep(2)
+        
             
 
             return self.frame, None
@@ -619,7 +622,7 @@ if __name__ == '__main__':
     print(PID)
     command_publisher.publish(PID) #send command to serialNODE
     time.sleep(3)
-    func()
+    #func()
     LC = lane_finding()
     #loop image collection
     while not rospy.is_shutdown():
