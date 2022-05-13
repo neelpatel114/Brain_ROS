@@ -597,7 +597,7 @@ class lane_finding:
 
 ################################### MAIN #########################################
 def func():
-#        pubSpeed.publish(0.10)
+        pubSpeed.publish(0.10)
         time.sleep(5)
 #        pub.publish(18.1)
 #        time.sleep(7)
@@ -615,6 +615,7 @@ if __name__ == '__main__':
     print(PID)
     command_publisher.publish(PID) #send command to serialNODE
     time.sleep(3)
+    func()
     LC = lane_finding()
     #loop image collection
     while not rospy.is_shutdown():
