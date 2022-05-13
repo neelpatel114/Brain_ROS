@@ -46,6 +46,7 @@ class lane_finding:
         # log some info about the image topic
         #rospy.loginfo(img_msg.header)
         # Try to convert the ROS Image message to a CV2 Image
+        rospy.loginfo(img_msg.header)
         try:
             cv_image = bridge.imgmsg_to_cv2(img_msg, "passthrough")
         except CvBridgeError as e:
@@ -53,12 +54,12 @@ class lane_finding:
         # Show the converted image
 
         #comment out if you do not want output
-        print("arian")
         self.show_image(cv_image)
         #self.run(img_msg)
 
     def show_image(self, img): 
         cv2.imshow("Image Window", img)
+        cv2.waitKey(3)
 
     def warp(self,img): # mts, dist
         #undist = cv2.undistort(img, mtx, dist, None, mtx)
