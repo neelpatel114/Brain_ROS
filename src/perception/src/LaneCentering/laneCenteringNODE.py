@@ -482,12 +482,12 @@ class lane_finding:
         #delay=int(1000 / fps)
 
         angle=0
-        #result = cv2.VideoWriter('filename3.avi', 
+        #result = xcv2.VideoWriter('filename3.avi', 
          #                cv2.VideoWriter_fourcc(*'MJPG'),
           #               30, (640,480))
 
         self.init=True
-        mtx, dist = distortion_factors()
+       # mtx, dist = distortion_factors()
 
         while True:
             frame = img
