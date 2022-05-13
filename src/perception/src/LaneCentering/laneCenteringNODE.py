@@ -53,7 +53,7 @@ class lane_finding:
         # Show the converted image
 
         #comment out if you do not want output
-        self.show_image(cv_image)
+        #self.show_image(cv_image)
         self.run(cv_image)
 
     def show_image(self, img): 
@@ -473,20 +473,20 @@ class lane_finding:
 
     def run(self, img):
 
-        cap = img # test_sample.mp4
-
+       #cap = img # test_sample.mp4
+       # cap = cv2.resize(frame,(640,480))
         ## video out ##
-        w = round(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-        h = round(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-        fps = cap.get(cv2.CAP_PROP_FPS) 
-        delay=int(1000 / fps)
+        #w = 640 #round(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        #h = 480 #round(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        #fps = cap.get(cv2.CAP_PROP_FPS) 
+        #delay=int(1000 / fps)
 
-        angle=0
-        result = cv2.VideoWriter('filename3.avi', 
-                         cv2.VideoWriter_fourcc(*'MJPG'),
-                         30, (640,480))
+        #angle=0
+        #result = cv2.VideoWriter('filename3.avi', 
+         #                cv2.VideoWriter_fourcc(*'MJPG'),
+          #               30, (640,480))
 
-        self.init=True
+        #self.init=True
         #mtx, dist = distortion_factors()
 
         while True:
