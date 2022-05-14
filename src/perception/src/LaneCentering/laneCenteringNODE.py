@@ -613,10 +613,10 @@ class lane_finding:
 
 ################################### MAIN #########################################
 def func():
-        pubSpeed.publish(0.9)
-        time.sleep(5)
+        pubSpeed.publish(0.10)
+        time.sleep(7)
         pub.publish(10.1)
-        time.sleep(5)
+        time.sleep(7)
         pub.publish(-10.1)
 
 
