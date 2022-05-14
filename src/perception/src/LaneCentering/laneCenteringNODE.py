@@ -613,6 +613,7 @@ class lane_finding:
 
 ################################### MAIN #########################################
 def func():
+    while True:
         pubSpeed.publish(0.10)
         time.sleep(7)
         pub.publish(10.1)
@@ -630,7 +631,9 @@ if __name__ == '__main__':
     PID = PID.replace("'", '"') #must replace '' for json formate (this was easier than regex)
     print(PID)
     command_publisher.publish(PID) #send command to serialNODE
-    time.sleep(3)
+    time.sleep(4)
+    pubSpeed.publish(0.10)
+    time.sleep(7)
     func()
     #LC = lane_finding()
     #loop image collection
